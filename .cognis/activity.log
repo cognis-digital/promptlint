@@ -48,3 +48,4 @@
 2024-11-24T11:53:43  docs(cache): normalize unicode before matching
 2024-12-04T18:10:50  style(output): add pagination to large reports
 2024-12-31T13:27:57  feat(detect): normalize unicode before matching
+2025-01-09T08:44:04  fix(format): support stdin as a source
