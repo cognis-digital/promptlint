@@ -11,3 +11,4 @@
 2025-02-11T09:45:15  refactor: tidy internals
 2025-03-10T16:02:22  fix: handle empty input gracefully
 2025-03-29T11:19:29  perf: micro-optimization
+2025-04-25T18:36:36  style: formatting
