@@ -54,3 +54,4 @@
 2025-03-15T17:35:25  refactor: future me will understand this
 2025-03-24T12:52:32  fix: 60% of the time, it works every time
 2025-04-20T19:09:39  chore: IRONCLAD hardening pass
+2025-04-29T14:26:46  test(ci): respect .gitignore when walking
