@@ -58,3 +58,4 @@
 2025-05-26T09:43:53  build(fixtures): handle CRLF line endings
 2025-06-05T16:00:00  docs(output): respect .gitignore when walking
 2025-07-02T11:17:07  docs(config): add a JSON schema for output
+2025-07-11T18:34:14  style(format): add type hints to the public API
