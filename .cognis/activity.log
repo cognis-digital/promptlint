@@ -59,3 +59,4 @@
 2025-06-05T16:00:00  docs(output): respect .gitignore when walking
 2025-07-02T11:17:07  docs(config): add a JSON schema for output
 2025-07-11T18:34:14  style(format): add type hints to the public API
+2025-08-08T13:51:21  style(scoring): extract the scorer
