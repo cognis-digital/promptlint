@@ -63,3 +63,4 @@
 2025-08-17T08:08:28  feat(io): add color + severity icons
 2025-09-14T15:25:35  refactor(mcp): extract the scorer
 2025-09-22T10:42:42  refactor(scan): bump the dev toolchain
+2025-10-19T17:59:49  ci(rules): load rules lazily for faster startup
