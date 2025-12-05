@@ -66,3 +66,4 @@
 2025-10-19T17:59:49  ci(rules): load rules lazily for faster startup
 2025-10-29T12:16:56  fix(deps): bump the dev toolchain
 2025-11-25T19:33:03  fix: works on my machine (TM)
+2025-12-05T14:50:10  perf: speed. I am speed.
