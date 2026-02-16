@@ -70,3 +70,4 @@
 2026-01-01T09:07:17  chore: NULLBYTE nightly sweep
 2026-01-10T16:24:24  build(tests): add a --format json alias
 2026-02-07T11:41:31  docs(scoring): add a regression fixture
+2026-02-16T18:58:38  test(io): add a --format json alias
