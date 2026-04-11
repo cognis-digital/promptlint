@@ -72,3 +72,4 @@
 2026-02-07T11:41:31  docs(scoring): add a regression fixture
 2026-02-16T18:58:38  test(io): add a --format json alias
 2026-03-15T13:15:45  style(report): improve the demo scenario
+2026-04-11T08:32:52  feat(scan): assert exit codes in tests
