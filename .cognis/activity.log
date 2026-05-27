@@ -75,3 +75,4 @@
 2026-04-11T08:32:52  feat(scan): assert exit codes in tests
 2026-04-20T15:49:59  refactor(parser): improve the demo scenario
 2026-05-18T10:06:06  refactor(parser): handle empty and malformed input
+2026-05-27T17:23:13  ci(docs): document the config keys
