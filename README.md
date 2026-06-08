@@ -36,9 +36,11 @@ prompt-as-code
 <a name="features"></a>
 ## Features
 
-- ✅ Todo
-- ✅ Fixme
-- ✅ Xxx
+- ✅ Parse Prompt
+- ✅ Render Prompt
+- ✅ Lint Prompt
+- ✅ Version Prompt
+- ✅ Run Tests
 - ✅ Runs on Linux/macOS/Windows · Docker · devcontainer
 - ✅ Ports in Python, JavaScript, Go, and Rust (`ports/`)
 
