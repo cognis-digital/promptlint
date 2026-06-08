@@ -1,0 +1,10 @@
+{
+  "name": "@cognis/promptlint",
+  "version": "0.2.0",
+  "description": "JavaScript port of promptlint (Cognis Neural Suite)",
+  "bin": {
+    "promptlint": "index.js"
+  },
+  "license": "LicenseRef-COCL-1.0",
+  "type": "module"
+}
