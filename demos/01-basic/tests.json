@@ -1,0 +1,25 @@
+{
+  "tests": [
+    {
+      "name": "greets-named-customer",
+      "vars": { "customer_name": "Jordan" },
+      "assert": [
+        { "name": "uses-customer-name", "kind": "contains", "value": "Jordan" },
+        { "name": "mentions-product", "kind": "contains", "value": "Greenway Solar" }
+      ]
+    },
+    {
+      "name": "no-internal-todo-leak",
+      "assert": [
+        { "name": "no-todo", "kind": "not_contains", "value": "TODO" }
+      ]
+    },
+    {
+      "name": "within-budget-and-resolved",
+      "assert": [
+        { "name": "char-budget", "kind": "max_chars", "value": 2000 },
+        { "name": "all-vars-resolved", "kind": "vars_resolved" }
+      ]
+    }
+  ]
+}
