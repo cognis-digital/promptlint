@@ -16,7 +16,7 @@
 </div>
 
 ```bash
-pip install cognis-promptlint
+pip install "git+https://github.com/cognis-digital/promptlint.git"
 promptlint scan .            # → prioritized findings in seconds
 ```
 
@@ -50,7 +50,7 @@ prompt-as-code
 ## Quick start
 
 ```bash
-pip install cognis-promptlint
+pip install "git+https://github.com/cognis-digital/promptlint.git"
 promptlint --version
 promptlint scan .                       # scan current project
 promptlint scan . --format json         # machine-readable
