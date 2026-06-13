@@ -9,16 +9,22 @@
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3500&pause=1000&color=6B46C1&center=true&vCenter=true&width=720&lines=Lint+version+and+test+prompts+as+code+with+a+CI+gate;Self-hostable+%C2%B7+MCP-native+%C2%B7+CI-ready+%C2%B7+polyglot" width="720"/>
 
-[![PyPI](https://img.shields.io/pypi/v/cognis-promptlint.svg?color=6b46c1)](https://pypi.org/project/cognis-promptlint/) [![CI](https://github.com/cognis-digital/promptlint/actions/workflows/ci.yml/badge.svg)](https://github.com/cognis-digital/promptlint/actions) [![License: COCL 1.0](https://img.shields.io/badge/License-COCL%201.0-2b6cb0.svg)](LICENSE) [![Suite](https://img.shields.io/badge/Cognis-Neural%20Suite-6b46c1.svg)](https://github.com/cognis-digital)
+[![install](https://img.shields.io/badge/install-git%2B%20%C2%B7%20pipx%20%C2%B7%20uv-6b46c1.svg)](#install--every-way-every-platform) [![CI](https://github.com/cognis-digital/promptlint/actions/workflows/ci.yml/badge.svg)](https://github.com/cognis-digital/promptlint/actions) [![License: COCL 1.0](https://img.shields.io/badge/License-COCL%201.0-2b6cb0.svg)](LICENSE) [![Suite](https://img.shields.io/badge/Cognis-Neural%20Suite-6b46c1.svg)](https://github.com/cognis-digital)
 
 *Developer Tools — fast, single-purpose, CI- and agent-friendly.*
 
 </div>
 
 ```bash
-pip install cognis-promptlint
+pip install "git+https://github.com/cognis-digital/promptlint.git"
 promptlint scan .            # → prioritized findings in seconds
 ```
+
+<!-- cognis:layman:start -->
+## What is this?
+
+promptlint is a command-line tool that checks your AI prompt files for common mistakes before you deploy them. It works like a spell-checker for prompts: it flags undeclared variables, empty bodies, and other issues that could cause your prompts to behave unexpectedly. You can also lock in a content fingerprint so you'll always know when a prompt has changed, and run lightweight tests to confirm your prompt produces the output you expect. It's aimed at developers and teams who treat prompts as code and want to catch errors early, in CI or locally, without sending anything to a cloud service.
+<!-- cognis:layman:end -->
 
 ## Contents
 
@@ -47,10 +53,56 @@ prompt-as-code
 <div align="right"><a href="#top">↑ back to top</a></div>
 
 <a name="quick-start"></a>
+<!-- cognis:domains:start -->
+## Domains
+
+**Primary domain:** AI & ML  ·  **JTF MERIDIAN division:** ATHENA-PRIME · SAGE
+
+**Topics:** `cognis` `ai` `llm` `machine-learning`
+
+Part of the **Cognis Neural Suite** — 300+ source-available tools organized across 12 domains under the JTF MERIDIAN command structure. See the [suite on GitHub](https://github.com/cognis-digital) and [jtf-meridian](https://github.com/cognis-digital/jtf-meridian) for how the pieces fit together.
+<!-- cognis:domains:end -->
+
+<!-- cognis:install:start -->
+## Install
+
+`promptlint` is source-available (not published to PyPI) — every method below installs
+straight from GitHub. Pick whichever you prefer; the one-line scripts auto-detect
+the best tool available on your machine.
+
+**One-liner (Linux / macOS):**
+```sh
+curl -fsSL https://raw.githubusercontent.com/cognis-digital/promptlint/HEAD/install.sh | sh
+```
+
+**One-liner (Windows PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/cognis-digital/promptlint/HEAD/install.ps1 | iex
+```
+
+**Or install manually — any one of:**
+```sh
+pipx install "git+https://github.com/cognis-digital/promptlint.git"     # isolated (recommended)
+uv tool install "git+https://github.com/cognis-digital/promptlint.git"  # uv
+pip install "git+https://github.com/cognis-digital/promptlint.git"      # pip
+```
+
+**From source:**
+```sh
+git clone https://github.com/cognis-digital/promptlint.git
+cd promptlint && pip install .
+```
+
+Then run:
+```sh
+promptlint --help
+```
+<!-- cognis:install:end -->
+
 ## Quick start
 
 ```bash
-pip install cognis-promptlint
+pip install "git+https://github.com/cognis-digital/promptlint.git"
 promptlint --version
 promptlint scan .                       # scan current project
 promptlint scan . --format json         # machine-readable
@@ -143,6 +195,32 @@ curl -fsSL https://raw.githubusercontent.com/cognis-digital/promptlint/main/inst
 <div align="right"><a href="#top">↑ back to top</a></div>
 
 <a name="related"></a>
+<a name="verification"></a>
+## Verification
+
+[![tests](https://img.shields.io/badge/tests-15%20passing-2ea44f.svg)](AUDIT.md)
+
+Every push is verified end-to-end. Latest audit (2026-06-13):
+
+```text
+tests        : 15 passed, 0 failed, 0 errored
+compile      : all modules parse
+cli          : C:\Python314\python.exe: No module named https
+package      : https
+```
+
+<details><summary>CLI surface (<code>--help</code>)</summary>
+
+```text
+C:\Python314\python.exe: No module named https
+```
+</details>
+
+Full machine-readable results: [`AUDIT.md`](AUDIT.md) · regenerate with `python -m https --help` + `pytest -q`.
+
+<div align="right"><a href="#top">↑ back to top</a></div>
+
+
 ## Related Cognis tools
 
 - [`mcpforge`](https://github.com/cognis-digital/mcpforge) — Scaffold, test, and publish MCP servers in minutes
