@@ -20,6 +20,41 @@ pip install cognis-promptlint
 promptlint scan .            # → prioritized findings in seconds
 ```
 
+## Usage — step by step
+
+1. Install the CLI (Python 3.9+):
+
+   ```bash
+   pip install git+https://github.com/cognis-digital/promptlint.git
+   ```
+
+2. Lint a prompt file against the static rules:
+
+   ```bash
+   promptlint lint prompts/summarize.txt
+   ```
+
+3. Print a content hash to detect drift across revisions:
+
+   ```bash
+   promptlint version prompts/summarize.txt
+   ```
+
+4. Run deterministic test cases against the prompt:
+
+   ```bash
+   promptlint test prompts/summarize.txt --tests tests/summarize.json
+   ```
+
+5. Use the combined CI gate (lint + tests) and read the exit code / JSON:
+
+   ```yaml
+   - name: prompt CI gate
+     run: |
+       pip install git+https://github.com/cognis-digital/promptlint.git
+       promptlint --format json check prompts/summarize.txt --tests tests/summarize.json
+   ```
+
 ## Contents
 
 - [Why promptlint?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
