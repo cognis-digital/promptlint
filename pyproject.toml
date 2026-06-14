@@ -34,3 +34,6 @@ promptlint = "promptlint.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["promptlint"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
