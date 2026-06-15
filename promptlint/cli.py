@@ -194,9 +194,15 @@ def main(argv: Optional[List[str]] = None) -> int:
     try:
         return args.func(args)
     except FileNotFoundError as e:
-        print(json.dumps({"tool": TOOL_NAME, "ok": False,
-                          "error": f"file not found: {e.filename}"})
-              if args.format == "json" else f"error: file not found: {e.filename}",
+        msg = f"file not found: {e.filename}"
+        print(json.dumps({"tool": TOOL_NAME, "ok": False, "error": msg})
+              if args.format == "json" else f"error: {msg}",
+              file=sys.stderr)
+        return 2
+    except OSError as e:
+        msg = f"cannot read file: {e}"
+        print(json.dumps({"tool": TOOL_NAME, "ok": False, "error": msg})
+              if args.format == "json" else f"error: {msg}",
               file=sys.stderr)
         return 2
     except (ValueError, json.JSONDecodeError) as e:

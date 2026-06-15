@@ -266,16 +266,29 @@ def _run_assertion(name: str, spec: Dict[str, Any], rendered: str,
                             "" if ok else f"should not contain {needle!r}")
     if kind == "regex":
         pat = str(spec.get("value", ""))
-        ok = re.search(pat, rendered) is not None
+        try:
+            ok = re.search(pat, rendered) is not None
+        except re.error as exc:
+            return AssertResult(name, kind, False, f"invalid regex pattern: {exc}")
         return AssertResult(name, kind, ok,
                             "" if ok else f"no match for /{pat}/")
     if kind == "max_chars":
-        limit = int(spec.get("value", 0))
+        try:
+            limit = int(spec.get("value", 0))
+        except (TypeError, ValueError):
+            return AssertResult(name, kind, False,
+                                "max_chars value must be an integer, "
+                                f"got {spec.get('value')!r}")
         ok = len(rendered) <= limit
         return AssertResult(name, kind, ok,
                             "" if ok else f"{len(rendered)} > {limit} chars")
     if kind == "min_chars":
-        limit = int(spec.get("value", 0))
+        try:
+            limit = int(spec.get("value", 0))
+        except (TypeError, ValueError):
+            return AssertResult(name, kind, False,
+                                "min_chars value must be an integer, "
+                                f"got {spec.get('value')!r}")
         ok = len(rendered) >= limit
         return AssertResult(name, kind, ok,
                             "" if ok else f"{len(rendered)} < {limit} chars")
@@ -295,7 +308,8 @@ def run_tests(doc: PromptDoc, cases: List[Dict[str, Any]]) -> List[Dict[str, Any
     results: List[Dict[str, Any]] = []
     for i, case in enumerate(cases):
         cname = case.get("name", f"case-{i + 1}")
-        overrides = case.get("vars", {}) or {}
+        raw_vars = case.get("vars")
+        overrides: Dict[str, Any] = raw_vars if isinstance(raw_vars, dict) else {}
         rendered, unresolved = render_prompt(doc, overrides)
         asserts = case.get("assert", []) or []
         ar: List[AssertResult] = []

@@ -167,6 +167,81 @@ class CliTest(unittest.TestCase):
         rc = main(["--format", "json", "lint", "/no/such/file.prompt"])
         self.assertEqual(rc, 2)
 
+    def test_directory_as_file_exit_two(self):
+        """Passing a directory path instead of a file should exit 2, not crash."""
+        import tempfile
+        d = tempfile.mkdtemp()
+        try:
+            rc = main(["lint", d])
+            self.assertEqual(rc, 2)
+        finally:
+            os.rmdir(d)
+
+    def test_malformed_json_test_spec_exit_two(self):
+        """A test spec that is not valid JSON should exit 2 with a clear error."""
+        ppath = self._write(SAMPLE)
+        tpath = self._write("not json at all {{{", suffix=".json")
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            rc = main(["test", ppath, "--tests", tpath])
+        self.assertEqual(rc, 2)
+
+
+class HardenedCoreTest(unittest.TestCase):
+    """Tests for robustness improvements in core.py."""
+
+    def _doc(self, text=SAMPLE):
+        return parse_prompt(text)
+
+    def test_bad_regex_returns_failed_assertion_not_crash(self):
+        """An invalid regex pattern should return a failed AssertResult, not raise."""
+        from promptlint.core import _run_assertion
+        result = _run_assertion(
+            "t", {"kind": "regex", "value": "[unterminated"}, "hello", []
+        )
+        self.assertFalse(result.passed)
+        self.assertIn("regex", result.detail.lower())
+
+    def test_bad_regex_through_run_tests_does_not_crash(self):
+        """run_tests with a bad regex should produce a failed case, not raise."""
+        doc = self._doc()
+        cases = [{"name": "bad_re", "assert": [{"kind": "regex", "value": "[bad"}]}]
+        results = run_tests(doc, cases)
+        self.assertEqual(len(results), 1)
+        self.assertFalse(results[0]["passed"])
+
+    def test_non_dict_vars_in_case_does_not_crash(self):
+        """A case whose 'vars' is a list (not a dict) should be silently ignored."""
+        doc = self._doc()
+        cases = [{"name": "listvar", "vars": ["not", "a", "dict"],
+                  "assert": [{"kind": "contains", "value": "Alex"}]}]
+        # Should not raise; falls back to no overrides (uses declared default 'Alex')
+        results = run_tests(doc, cases)
+        self.assertEqual(len(results), 1)
+        self.assertTrue(results[0]["passed"])
+
+    def test_empty_cases_list_returns_empty_results(self):
+        """run_tests with an empty list should return an empty list, not crash."""
+        doc = self._doc()
+        results = run_tests(doc, [])
+        self.assertEqual(results, [])
+
+    def test_max_chars_non_int_value_returns_failed_assertion(self):
+        """max_chars with a non-integer 'value' should fail gracefully, not raise."""
+        from promptlint.core import _run_assertion
+        result = _run_assertion(
+            "t", {"kind": "max_chars", "value": "notanumber"}, "hello", []
+        )
+        self.assertFalse(result.passed)
+        self.assertIn("integer", result.detail)
+
+    def test_min_chars_non_int_value_returns_failed_assertion(self):
+        """min_chars with a non-integer 'value' should fail gracefully, not raise."""
+        from promptlint.core import _run_assertion
+        result = _run_assertion("t", {"kind": "min_chars", "value": None}, "hello", [])
+        self.assertFalse(result.passed)
+        self.assertIn("integer", result.detail)
+
 
 if __name__ == "__main__":
     unittest.main()
