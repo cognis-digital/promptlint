@@ -1,0 +1,19 @@
+$ promptlint-emit --help
+
+usage: promptlint [-h] [--version] [--format {table,json}]
+                  {lint,version,test,check} ...
+
+Lint, version, and test prompts as code with a CI gate.
+
+positional arguments:
+  {lint,version,test,check}
+    lint                run static rules over a prompt file
+    version             print a content hash for drift detection
+    test                run deterministic test cases
+    check               CI gate: lint + tests together
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --format {table,json}
+                        output format (default: table)

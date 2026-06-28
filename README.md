@@ -20,6 +20,65 @@ pip install cognis-promptlint
 promptlint scan .            # → prioritized findings in seconds
 ```
 
+
+<!-- cognis:example:start -->
+## 🔎 Example output
+
+Real, reproducible output from the tool — runs offline:
+
+```console
+$ promptlint-emit --version
+promptlint 0.1.0
+```
+
+```console
+$ promptlint-emit --help
+usage: promptlint [-h] [--version] [--format {table,json}]
+                  {lint,version,test,check} ...
+
+Lint, version, and test prompts as code with a CI gate.
+
+positional arguments:
+  {lint,version,test,check}
+    lint                run static rules over a prompt file
+    version             print a content hash for drift detection
+    test                run deterministic test cases
+    check               CI gate: lint + tests together
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --format {table,json}
+                        output format (default: table)
+```
+
+> Blocks above are real `promptlint` output — reproduce them from a clone.
+
+**Sample result format** _(illustrative values — run on your own data for real findings):_
+
+```
+{
+"findings": [
+    {
+        "id": "1234567890",
+        "title": "Suspicious Activity Detected",
+        "description": "Possible malicious activity observed on IP 192.168.1.100",
+        "severity": "high",
+        "created_at": "2023-02-15T14:30:00Z"
+    },
+    {
+        "id": "2345678901",
+        "title": "Anomalous Network Traffic",
+        "description": "Unusual TCP traffic detected on port 443 from IP 192.168.1.101",
+        "severity": "medium",
+        "created_at": "2023-02-15T14:35:00Z"
+    }
+]
+}
+```
+
+<!-- cognis:example:end -->
+
 ## Usage — step by step
 
 1. Install the CLI (Python 3.9+):

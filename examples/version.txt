@@ -1,0 +1,3 @@
+$ promptlint-emit --version
+
+promptlint 0.1.0
